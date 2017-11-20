@@ -16,7 +16,6 @@ graph = startGraph("http://localhost:7474/db/data/", username="neo4j", password=
 n_chunks = 13
 
 #FETCH ALL USER THAT HAVE MORE THANT 10 likes
-#users_list = cypherToList(graph, "MATCH (u:users) WITH u, split(u.likes, ' ') AS list WHERE size(list) > 15 RETURN u.id_users")
 users_list = cypherToList(graph, "MATCH (u:users) WITH u, split(u.likes, ' ') AS list, rand() AS number WHERE size(list) > {param} RETURN u.id_users ORDER BY number LIMIT 10", list(param=n_chunks))
 
 mean = 0
